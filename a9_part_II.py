@@ -20,7 +20,7 @@ def get_planet_radius(planet_name: str) -> str:
     """
     infobox_text = clean_text(get_first_infobox_text(get_page_html(planet_name)))
     # TODO: fill this in
-    pattern = "(?P<radius>\d)"
+    pattern = r"polar radius[^0-9]*?(?P<radius>\d+(\.\d+)?)"
     error_text = "Page infobox has no polar radius information"
     match = get_match(infobox_text, pattern, error_text)
     return match.group("radius")
@@ -37,7 +37,7 @@ def get_birth_date(name: str) -> str:
     """
     infobox_text = clean_text(get_first_infobox_text(get_page_html(name)))
     # TODO: fill this in
-    pattern = "(?P<name>\w{2})"
+    pattern = r"(?P<birth>\d{4}-\d{2}-\d{2})"
     error_text = (
         "Page infobox has no birth information (at least none in xxxx-xx-xx format)"
     )
